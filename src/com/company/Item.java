@@ -8,10 +8,12 @@ public class Item {
     private int power;
     private int defense;
     private Random random;
+    private String[] itemNames;
 
-    public Item(String name) {
-        this.name = name;
+    public Item() {
+        itemNames = new String[]{"Zbroja", "Miecz", "Tarcza", "Kolczuga", "Patyk", "Amulet"};
         random = new Random();
+        name = itemNames[random.nextInt(6)];
         drawStats();
     }
 
@@ -33,7 +35,7 @@ public class Item {
     }
 
     public void printItem(){
-        System.out.println("Przedmiot na sprzedaż: \nNazwa: " + name + "\nSiła: " + power + "\nObrona: " + defense + "\nCena: " + price + "\n");
+        System.out.println("Nazwa: " + name + "\nSiła: " + power + "\nObrona: " + defense + "\nCena: " + price + "\n");
     }
 
     public int getPrice() {

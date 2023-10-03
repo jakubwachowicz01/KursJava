@@ -13,4 +13,15 @@ public class Monster {
         defense = 4-power;
     }
 
+    public int getPower() {
+        return power;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public String toString(){
+        return "AUWGHH!!!\nSiła: " + power + "\nObrona: " + defense;
+    }
 }
