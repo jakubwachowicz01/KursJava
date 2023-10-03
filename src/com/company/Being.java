@@ -9,5 +9,12 @@ public abstract class Being {
     private int coins;
     Random random;
 
+    public Being() {
+        this.name = name;
+        this.power = power;
+        this.defense = defense;
+        this.coins = coins;
+        this.random = random;
+    }
 
 }

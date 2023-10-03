@@ -7,14 +7,13 @@ public class Item {
     private int price;
     private int power;
     private int defense;
-    Random random;
+    private Random random;
 
     public Item(String name) {
         this.name = name;
         random = new Random();
         drawStats();
     }
-
 
     private void drawStats(){
         int cost123 = random.nextInt(3);
@@ -31,8 +30,9 @@ public class Item {
             power = random.nextInt(4);
             defense = 3-power;
         }
+    }
 
-
-
+    public void printItem(){
+        System.out.println("Przedmiot na sprzedaż: \nNazwa: " + name + "\nSiła: " + power + "\nObrona: " + defense + "\nCena: " + price + "\n");
     }
 }
