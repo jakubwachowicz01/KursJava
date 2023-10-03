@@ -1,19 +1,22 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-public class Hero {
-    String name;
-    private int power;
-    private int defense;
-    private int coins;
-    Random random;
+public class Hero extends Being{
 
-    public Hero(String name) {
-        this.name = name;
+
+    ArrayList<Item> items;
+
+    public Hero() {
+        items = new ArrayList<>();
         coins = 25;
         random = new Random();
+        power = random.nextInt(5);
+        defense = 4-power;
+    }
 
-        power = random.nextInt(4);
+    public void setName(String name){
+        this.name = name;
     }
 }
