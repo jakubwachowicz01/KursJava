@@ -35,4 +35,16 @@ public class Item {
     public void printItem(){
         System.out.println("Przedmiot na sprzedaż: \nNazwa: " + name + "\nSiła: " + power + "\nObrona: " + defense + "\nCena: " + price + "\n");
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
 }
