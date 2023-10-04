@@ -18,20 +18,10 @@ public class Item {
     }
 
     private void drawStats(){
-        int cost123 = random.nextInt(3);
-        if(cost123 == 0){
-            price = 5;
-            power = random.nextInt(2);
-            defense = 1-power;
-        }else if(cost123 == 1){
-            price = 10;
-            power = random.nextInt(3);
-            defense = 2-power;
-        }else{
-            price = 15;
-            power = random.nextInt(4);
-            defense = 3-power;
-        }
+        int cost123 = 1+random.nextInt(3);
+        price = 5*(cost123);
+        power = random.nextInt(cost123);
+        defense = cost123-power;
     }
 
     public void printItem(){

@@ -13,6 +13,10 @@ public class Seller {
         items = new ArrayList<>();
     }
 
+    public Item chooseItemToSell(int choice){
+        return items.get(choice-1);
+    }
+
     public void generateItems(){
         for (int i = 0 ; i < 5; i++){
             items.add(new Item());

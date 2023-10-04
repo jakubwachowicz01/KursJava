@@ -1,78 +1,70 @@
 package com.company;
 
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameLogic {
     private Scanner scanner;
     private Hero hero;
     private Seller seller;
-    private static String GREEN ="\u001B[32m";
-    private static String RESET = "\u001B[0m";
-    private static String YELLOW = "\u001B[33m";
-    private static String RED = "\u001B[31m";
+    private Interface gameInterface;
 
     public GameLogic() {
-        scanner = new Scanner(System.in);
+        gameInterface = new Interface();
+        seller = new Seller();
     }
 
     public void startGame(){
-        this.seller = new Seller();
         while (true){
-            createHero();
-            hero.printHero();
-            for (int i = 0; i < 3; i++){
+            this.hero = new Hero(gameInterface.getHeroName());
+            gameInterface.displayHeroStats(hero);
+
+            while(hero.getMonstersSlayed() < 3){
                 seller.generateItems();
-                seller.displayItems();
-                sellerChooseItem();
-                Monster monster = createMonster();
-                boolean isHeroAlive = fightMonster(monster);
-                if (isHeroAlive == false){
+                gameInterface.displayItems(seller);
+                sellingItem();
+
+                Monster monster = new Monster(hero.getMonstersSlayed());
+                gameInterface.displayMonsterStats(monster);
+                int fightResult = fightMonster(monster);
+                gameInterface.displayFightResults(fightResult);
+                gameInterface.displayHeroStats(hero);
+                if (fightResult == -1){
+                    gameInterface.heroDefeated();
                     break;
                 }
-                hero.printHero();
-                i++;
+                if(hero.getMonstersSlayed() == 3){
+                    gameInterface.gameWon(seller);
+                    break;
+                }
             }
         }
     }
 
-    private void sellerChooseItem(){
-        System.out.println("Wybierz przedmiot, który chcesz sprzedać: ");
-        int choice = scanner.nextInt();
-        Item item = seller.getItems().get(choice-1);
-        boolean canBuy = hero.buyItem(item);
-        if(canBuy){
-            seller.sellItem(item);
-        }
-        seller.cleanItems();
-    }
-
-    private boolean fightMonster(Monster monster){
-        System.out.println();
-        System.out.println("Walka z potworem o statystykach: ");
-        System.out.println(monster.toString());
-        if (hero.getPower() >= monster.getDefense()){
-            System.out.println(GREEN + "Heros pokonał potwora!" + RESET);
-            seller.setPoints(seller.getPoints()+2);
-            return true;
-        }else if (monster.getPower() > hero.getDefense()){
-            System.out.println(RED + "Potwór pokonał herosa." + RESET);
-            return false;
+    private void sellingItem(){
+        int choice = gameInterface.chooseItemFromPool();
+        Item itemChosenToSell = seller.chooseItemToSell(choice);
+        boolean couldBuy = hero.buyItem(itemChosenToSell);
+        if(couldBuy){
+            seller.sellItem(itemChosenToSell);
+            seller.cleanItems();
         }else{
-            System.out.println(YELLOW + "Herosowi nie udało się pokonać potwora, ale heros przeżył." + RESET);
-            seller.setPoints(seller.getPoints()+1);
-            return true;
+            gameInterface.tooLittleMoney();
+            sellingItem();
         }
     }
 
-    private void createHero(){
-        /*System.out.print("Podaj imię herosa: ");
-        String name = scanner.nextLine();*/
-        //return new Hero(name);
-        this.hero = new Hero("Jan");
-    }
-    private Monster createMonster(){
-        return new Monster();
+    private int fightMonster(Monster monster){
+        if (hero.getPower() >= monster.getDefense()){
+            seller.setPoints(seller.getPoints()+2);
+            hero.setMonstersSlayed(hero.getMonstersSlayed()+1);
+            hero.setCoins(hero.getCoins()+5);
+            return 1;
+        }else if (monster.getPower() > hero.getDefense()){
+            return -1;
+        }else{
+            seller.setPoints(seller.getPoints()+1);
+            return 0;
+        }
     }
 }

@@ -7,10 +7,10 @@ public class Monster {
     private int defense;
     private Random random;
 
-    public Monster() {
+    public Monster(int monstersSlayed) {
         random = new Random();
-        power = random.nextInt(5);
-        defense = 4-power;
+        power = random.nextInt(5+monstersSlayed);
+        defense = (4+monstersSlayed)-power;
     }
 
     public int getPower() {

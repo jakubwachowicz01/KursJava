@@ -8,13 +8,13 @@ public class Hero {
     private int power;
     private int defense;
     private int coins;
-    //private int points;
-    //private int coinsEarned;
+    private int monstersSlayed;
     private Random random;
     private static String RESET = "\u001B[0m";
     private static String PURPLE = "\u001B[45m";
 
     public Hero(String name) {
+        monstersSlayed = 0;
         this.name = name;
         coins = 25;
         random = new Random();
@@ -22,8 +22,16 @@ public class Hero {
         defense = 4-power;
     }
 
-    public void printHero(){
-        System.out.println(PURPLE + name + "\nSiła: " + power + "\nObrona: " + defense + "\nMonety: " + coins+"\n" + RESET);
+    public int getMonstersSlayed() {
+        return monstersSlayed;
+    }
+
+    public void setMonstersSlayed(int monstersSlayed) {
+        this.monstersSlayed = monstersSlayed;
+    }
+
+    public String toString(){
+        return PURPLE + name + "\nSiła: " + power + "\nObrona: " + defense + "\nMonety: " + coins+"\n" + RESET;
     }
 
     public boolean buyItem(Item item){
@@ -35,6 +43,14 @@ public class Hero {
         power += item.getPower();
         defense += item.getDefense();
         return true;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
+    public int getCoins() {
+        return coins;
     }
 
     public int getPower() {
