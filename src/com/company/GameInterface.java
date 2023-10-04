@@ -22,12 +22,12 @@ public class GameInterface {
     }
 
     public void displayMonsterStats(Monster monster){
-        System.out.println( "\n" + ANSI_YELLOW_BACKGROUND + "Walka z potworem o statystykach: \n" + monster.toString() + RESET);
+        System.out.println( "\n" + ANSI_YELLOW_BACKGROUND + "Wioskę zaatakował potwór!! \n" + monster.toString() + RESET + "\n");
     }
 
     public int chooseItemFromPool() {
         System.out.print("Wybierz przedmiot, który chcesz sprzedać: ");
-        return scanner.nextInt();
+        return Integer.valueOf(scanner.nextLine());
     }
 
     public void tooLittleMoney(){

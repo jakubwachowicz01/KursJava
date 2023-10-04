@@ -17,12 +17,12 @@ public class GameLogic {
             gameInterface.displayHeroStats(hero);
 
             while(true){
+                Monster monster = new Monster(hero.getMonstersSlayed());
+                gameInterface.displayMonsterStats(monster);
                 seller.generateItems();
                 gameInterface.displayItems(seller);
                 sellingItem();
 
-                Monster monster = new Monster(hero.getMonstersSlayed());
-                gameInterface.displayMonsterStats(monster);
                 int fightResult = fightMonster(monster);
                 gameInterface.displayFightResults(fightResult);
                 gameInterface.displayHeroStats(hero);
@@ -37,6 +37,8 @@ public class GameLogic {
             }
         }
     }
+
+
 
     private void sellingItem(){
         int choice = gameInterface.chooseItemFromPool();
