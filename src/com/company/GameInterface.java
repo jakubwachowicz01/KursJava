@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 
-public class Interface {
+public class GameInterface {
     private Scanner scanner;
     private static String GREEN = "\u001B[32m";
     private static String RESET = "\u001B[0m";
@@ -13,12 +13,12 @@ public class Interface {
     private static String PURPLE = "\u001B[45m";
     private static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
 
-    public Interface() {
+    public GameInterface() {
         scanner = new Scanner(System.in);
     }
 
     public void displayHeroStats(Hero hero){
-        System.out.println(hero.toString());
+        System.out.println("\n" + hero.toString());
     }
 
     public void displayMonsterStats(Monster monster){

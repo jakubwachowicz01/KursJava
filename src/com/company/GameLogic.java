@@ -1,16 +1,13 @@
 package com.company;
 
-
-import java.util.Scanner;
-
 public class GameLogic {
-    private Scanner scanner;
+
     private Hero hero;
     private Seller seller;
-    private Interface gameInterface;
+    private GameInterface gameInterface;
 
     public GameLogic() {
-        gameInterface = new Interface();
+        gameInterface = new GameInterface();
         seller = new Seller();
     }
 
@@ -19,7 +16,7 @@ public class GameLogic {
             this.hero = new Hero(gameInterface.getHeroName());
             gameInterface.displayHeroStats(hero);
 
-            while(hero.getMonstersSlayed() < 3){
+            while(true){
                 seller.generateItems();
                 gameInterface.displayItems(seller);
                 sellingItem();
