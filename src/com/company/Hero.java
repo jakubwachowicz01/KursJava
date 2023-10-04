@@ -3,23 +3,26 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Hero {
+public class Hero extends Being{
     private String name;
-    private int power;
-    private int defense;
-    private int coins;
     private int monstersSlayed;
-    private Random random;
     private static String RESET = "\u001B[0m";
     private static String PURPLE = "\u001B[45m";
+    private HeroType heroType;
+    private String[] heroNames;
 
     public Hero(String name) {
         monstersSlayed = 0;
         this.name = name;
         coins = 25;
-        random = new Random();
         power = random.nextInt(5);
         defense = 4-power;
+        this.heroType = HeroType.values()[random.nextInt(HeroType.values().length)];
+
+    }
+
+    public HeroType getHeroType() {
+        return heroType;
     }
 
     public int getMonstersSlayed() {
@@ -31,12 +34,15 @@ public class Hero {
     }
 
     public String toString(){
-        return PURPLE + name + "\nSiła: " + power + "\nObrona: " + defense + "\nMonety: " + coins+"\n" + RESET;
+        return PURPLE + name +"\n"+ heroType.getDescription()+"\nSiła: " + power + "\nObrona: " + defense + "\nMonety: " + coins+"\n" + RESET;
     }
 
     public boolean buyItem(Item item){
         if (coins < item.getPrice()){
-            System.out.println("Niewystarczające fundusze!");
+            System.out.println("Heros ma za mało pieniędzy, wybierz inny przedmiot!");
+            return false;
+        }else if(!(item.getItemType().name().equals(getHeroType().name()))){
+            System.out.println("Niekompatybilna klasa!");
             return false;
         }
         coins -= item.getPrice();
@@ -53,11 +59,4 @@ public class Hero {
         return coins;
     }
 
-    public int getPower() {
-        return power;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
 }

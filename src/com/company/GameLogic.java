@@ -23,7 +23,7 @@ public class GameLogic {
                 gameInterface.displayItems(seller);
                 sellingItem();
 
-                int fightResult = fightMonster(monster);
+                int fightResult = fightBeing(monster);
                 gameInterface.displayFightResults(fightResult);
                 gameInterface.displayHeroStats(hero);
                 if (fightResult == -1){
@@ -38,28 +38,27 @@ public class GameLogic {
         }
     }
 
-
-
     private void sellingItem(){
         int choice = gameInterface.chooseItemFromPool();
+        // if(choice == 6) return;
         Item itemChosenToSell = seller.chooseItemToSell(choice);
         boolean couldBuy = hero.buyItem(itemChosenToSell);
         if(couldBuy){
             seller.sellItem(itemChosenToSell);
             seller.cleanItems();
         }else{
-            gameInterface.tooLittleMoney();
+            //gameInterface.tooLittleMoney();
             sellingItem();
         }
     }
 
-    private int fightMonster(Monster monster){
-        if (hero.getPower() >= monster.getDefense()){
+    private int fightBeing(Being being){
+        if (hero.getPower() >= being.getDefense()){
             seller.setPoints(seller.getPoints()+2);
             hero.setMonstersSlayed(hero.getMonstersSlayed()+1);
             hero.setCoins(hero.getCoins()+5);
             return 1;
-        }else if (monster.getPower() > hero.getDefense()){
+        }else if (being.getPower() > hero.getDefense()){
             return -1;
         }else{
             seller.setPoints(seller.getPoints()+1);

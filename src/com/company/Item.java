@@ -57,4 +57,8 @@ public class Item {
     public int getDefense() {
         return defense;
     }
+
+    public ItemType getItemType() {
+        return itemType;
+    }
 }

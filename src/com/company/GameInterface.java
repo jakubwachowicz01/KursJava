@@ -26,7 +26,7 @@ public class GameInterface {
     }
 
     public int chooseItemFromPool() {
-        System.out.print("Wybierz przedmiot, który chcesz sprzedać: ");
+        System.out.print("6 pomiń\nWybierz przedmiot, który chcesz sprzedać: ");
         return Integer.valueOf(scanner.nextLine());
     }
 
