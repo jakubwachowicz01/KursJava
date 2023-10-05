@@ -18,7 +18,6 @@ public class Hero extends Being{
         power = random.nextInt(5);
         defense = 4-power;
         this.heroType = HeroType.values()[random.nextInt(HeroType.values().length)];
-
     }
 
     public HeroType getHeroType() {

@@ -1,10 +1,13 @@
 package com.company;
 
+import java.util.Random;
+
 public class GameLogic {
 
     private Hero hero;
     private Seller seller;
     private GameInterface gameInterface;
+    private Random random;
 
     public GameLogic() {
         gameInterface = new GameInterface();
@@ -17,13 +20,13 @@ public class GameLogic {
             gameInterface.displayHeroStats(hero);
 
             while(true){
-                Monster monster = new Monster(hero.getMonstersSlayed());
-                gameInterface.displayMonsterStats(monster);
+                Being oponent = generateOponent();
+                gameInterface.displayBeingStats(oponent);
                 seller.generateItems();
                 gameInterface.displayItems(seller);
                 sellingItem();
 
-                int fightResult = fightBeing(monster);
+                int fightResult = fightBeing(oponent);
                 gameInterface.displayFightResults(fightResult);
                 gameInterface.displayHeroStats(hero);
                 if (fightResult == -1){
@@ -49,6 +52,15 @@ public class GameLogic {
         }else{
             //gameInterface.tooLittleMoney();
             sellingItem();
+        }
+    }
+
+    private Being generateOponent(){
+        boolean isMonster = new Random().nextBoolean();
+        if (isMonster){
+            return new Monster(hero.getMonstersSlayed());
+        }else{
+            return new Hero("Wrogi heros");
         }
     }
 

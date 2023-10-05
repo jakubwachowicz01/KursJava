@@ -21,12 +21,12 @@ public class GameInterface {
         System.out.println("\n" + hero.toString());
     }
 
-    public void displayMonsterStats(Monster monster){
-        System.out.println( "\n" + ANSI_YELLOW_BACKGROUND + "Wioskę zaatakował potwór!! \n" + monster.toString() + RESET + "\n");
+    public void displayBeingStats(Being being){
+        System.out.println( "\n" + ANSI_YELLOW_BACKGROUND + "Wioskę zaatakował \n" + being.displayStats() + RESET + "\n");
     }
 
     public int chooseItemFromPool() {
-        System.out.print("6 pomiń\nWybierz przedmiot, który chcesz sprzedać: ");
+        //System.out.print("6 pomiń\nWybierz przedmiot, który chcesz sprzedać: ");
         return Integer.valueOf(scanner.nextLine());
     }
 

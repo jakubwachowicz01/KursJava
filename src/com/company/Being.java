@@ -6,6 +6,7 @@ public abstract class Being {
     int power;
     int defense;
     int coins;
+    String name;
     Random random = new Random();
 
     public int getPower() {
@@ -16,4 +17,7 @@ public abstract class Being {
         return defense;
     }
 
+    public String displayStats(){
+        return name + "\nPower: " + power + "\nDefense: " + defense;
+    }
 }
